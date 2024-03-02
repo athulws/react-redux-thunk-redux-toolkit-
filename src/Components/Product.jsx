@@ -3,18 +3,18 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-
+import { Alert, CardFooter } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../Store/cartSlice';
 import { getProducts } from '../Store/ProductSlice';
-
+import StatusCode from '../utils/StatusCode';
 
 
 const Product = () => {
     
 
     const dispatch = useDispatch();
-    const {data: products} = useSelector(state => state.products);
+    const {data: products,status} = useSelector(state => state.products);
 
     useEffect(()=>{
         dispatch(getProducts());
@@ -27,6 +27,18 @@ const Product = () => {
     //         .then(data => data.json())
     //         .then(result => getProduct(result));
     // }, [])
+
+
+    // ................................................status code...................................
+    if (status===StatusCode.LOADING) {
+        return <p>Loading...</p>
+    }
+
+    if (status===StatusCode.ERROR) {
+        return <Alert key="danger" variant='danger'>Something went wrong!!! Please try again later</Alert>
+    }
+    // ................................................status code...................................
+
 
     // ...............................cart il add aakan....................................................................................................
 
