@@ -4,23 +4,33 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../Store/cartSlice';
+import { getProducts } from '../Store/ProductSlice';
 
 
 
 const Product = () => {
-    const [products, getProduct] = useState([]);
+    
 
-    useEffect(() => {
-        fetch('https://fakestoreapi.com/products')
-            .then(data => data.json())
-            .then(result => getProduct(result));
-    }, [])
+    const dispatch = useDispatch();
+    const {data: products} = useSelector(state => state.products);
+
+    useEffect(()=>{
+        dispatch(getProducts());
+    },[]);
+
+    // const [products, getProduct] = useState([]);
+
+    // useEffect(() => {
+    //     fetch('https://fakestoreapi.com/products')
+    //         .then(data => data.json())
+    //         .then(result => getProduct(result));
+    // }, [])
 
     // ...............................cart il add aakan....................................................................................................
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch(); enn mukalil vilichittunde
 
     const addToCart = (product) => {
         dispatch(add(product))
