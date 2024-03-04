@@ -27,6 +27,7 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import StatusCode from '../utils/StatusCode';
+//IF I USE AXIOS => import axios from 'axios';
 
 const initialState = { //here the initial state is not empty. we are making an API call, So api calls basically always not written data it also written errors or other status so to handle all the expect of api lets make it an object and the result in data that is empty as of now.
     data:[],            // API call cheyyumbol oru object create cheyyanam, athil aan initialSate cheyyendath
@@ -62,3 +63,12 @@ export const getProducts = createAsyncThunk('products/get', async () => { // "pr
     const result = await data.json();
     return result; //we don't have dispatch anything because nothing in reducers.So just i have to "return" the data
 })
+
+
+// IF I USE AXIOS
+//----------------
+
+// export const getProducts = createAsyncThunk('products/get', async () => {
+//     const response = await axios.get('https://fakestoreapi.com/products'); // Use Axios for GET request
+//     return response.data; // Return data from the response
+// })
